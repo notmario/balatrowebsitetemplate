@@ -36,8 +36,9 @@ let cols = {
   VOUCHER: "#cb724c",
   BOOSTER: "#646eb7",
   EDITION: "#ffffff",
-  DARK_EDITION: "#000000",
+  DARK_EDITION: "#5d5dff",
   ETERNAL: "#c75985",
+  INACTIVE: "#ffffff99",
   DYN_UI: {
     MAIN: "#374244",
     DARK: "#374244",
@@ -122,12 +123,24 @@ for (let joker of jokers) {
 
   let joker_div = document.createElement("div");
   joker_div.classList.add("joker");
-  joker_div.innerHTML = `
-    <h3>${joker.name}</h3>
-    <img src="${joker.image_url}" alt="${joker.name}" />
-    <h4 class="rarity" style="background-color: ${rarities[joker.rarity]}">${joker.rarity}</h4>
-    <div class="text">${joker.text}</div>
-  `;
+  if (joker.soul) {
+    joker_div.innerHTML = `
+      <h3>${joker.name}</h3>
+      <span class="soulholder">
+        <img src="${joker.image_url}" alt="${joker.name}" class="soul-bg" />
+        <img src="${joker.image_url}" alt="${joker.name}" class="soul-top" />
+      </span>
+      <h4 class="rarity" style="background-color: ${rarities[joker.rarity]}">${joker.rarity}</h4>
+      <div class="text">${joker.text}</div>
+    `;
+  } else {
+    joker_div.innerHTML = `
+      <h3>${joker.name}</h3>
+      <img src="${joker.image_url}" alt="${joker.name}" />
+      <h4 class="rarity" style="background-color: ${rarities[joker.rarity]}">${joker.rarity}</h4>
+      <div class="text">${joker.text}</div>
+    `;
+  }
 
   jokers_div.appendChild(joker_div);
 }
