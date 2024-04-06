@@ -9,6 +9,34 @@ let jokers = [
   }
 ]
 
+// works the same. 
+let consumables = [
+  // {
+  //   name: "Joker",
+  //   text: [
+  //     "{C:mult}+4{} Mult"
+  //   ],
+  //   image_url: "img/j_joker.png",
+  //   rarity: "Tarot"
+  // },
+  // {
+  //   name: "Joker",
+  //   text: [
+  //     "{C:mult}+4{} Mult"
+  //   ],
+  //   image_url: "img/j_joker.png",
+  //   rarity: "Planet"
+  // },
+  // {
+  //   name: "Joker",
+  //   text: [
+  //     "{C:mult}+4{} Mult"
+  //   ],
+  //   image_url: "img/j_joker.png",
+  //   rarity: "Spectral"
+  // },
+]
+
 let cols = {
   
   MULT: "#FE5F55",
@@ -90,7 +118,13 @@ let rarities = {
   "Common": "#009dff", 
   "Uncommon": "#4BC292",
   "Rare": "#fe5f55",
-  "Legendary": "#b26cbb"
+  "Legendary": "#b26cbb",
+  "Joker": "#708b91",
+  "Tarot": "#a782d1",
+  "Planet": "#13afce",
+  "Spectral": "#4584fa",
+  "Voucher": "#fd682b",
+  "Edition": "#4ca893",
 }
 
 regex = /{([^}]+)}/g;
@@ -143,4 +177,58 @@ for (let joker of jokers) {
   }
 
   jokers_div.appendChild(joker_div);
+}
+
+if (consumables.length === 0) {
+  document.querySelector(".consumableshidebydefault").style.display = "none"
+}
+
+let consumables_div = document.querySelector(".consumables");
+
+for (let consumable of consumables) {
+  console.log("adding consumable", consumable.name);
+
+  consumable.text = consumable.text.map((line) => { return line + "{}"});
+
+  consumable.text = consumable.text.join("<br/>");
+  consumable.text = consumable.text.replaceAll("{}", "</span>");
+  consumable.text = consumable.text.replace(regex, function replacer(match, p1, offset, string, groups) {
+    let classes = p1.split(",");
+
+    let css_styling = "";
+
+    for (let i = 0; i < classes.length; i++) {
+      let parts = classes[i].split(":");
+      if (parts[0] === "C") {
+        css_styling += `color: ${cols[parts[1].toUpperCase()]};`;
+      } else if (parts[0] === "X") {
+        css_styling += `background-color: ${cols[parts[1].toUpperCase()]}; border-radius: 5px; padding: 0 5px;`;
+      }
+    }
+
+    return `</span><span style='${css_styling}'>`;
+  });
+
+  let consumable_div = document.createElement("div");
+  consumable_div.classList.add("joker");
+  if (consumable.soul) {
+    consumable_div.innerHTML = `
+      <h3>${consumable.name}</h3>
+      <span class="soulholder">
+        <img src="${consumable.image_url}" alt="${consumable.name}" class="soul-bg" />
+        <img src="${consumable.image_url}" alt="${consumable.name}" class="soul-top" />
+      </span>
+      <h4 class="rarity" style="background-color: ${rarities[consumable.rarity]}">${consumable.rarity}</h4>
+      <div class="text">${consumable.text}</div>
+    `;
+  } else {
+    consumable_div.innerHTML = `
+      <h3>${consumable.name}</h3>
+      <img src="${consumable.image_url}" alt="${consumable.name}" />
+      <h4 class="rarity" style="background-color: ${rarities[consumable.rarity]}">${consumable.rarity}</h4>
+      <div class="text">${consumable.text}</div>
+    `;
+  }
+
+  consumables_div.appendChild(consumable_div);
 }

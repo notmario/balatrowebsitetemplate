@@ -40,7 +40,7 @@ h1 {
   margin-bottom: 1rem;
 }
 
-.jokers {
+.jokers, .consumables {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
   gap: 1rem;
@@ -68,6 +68,7 @@ h1 {
   border: 2px solid white;
   border-radius: 1rem;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .rarity {
