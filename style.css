@@ -40,7 +40,7 @@ h1 {
   margin-bottom: 1rem;
 }
 
-.jokers, .consumables {
+.cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
   gap: 1rem;
@@ -59,6 +59,21 @@ h1 {
 .joker img {
   height: 190px;
   image-rendering: pixelated;
+}
+img.hasback {
+  background-image: url("img/sticker_bg.png");
+  background-size: 142px 190px;
+}
+@keyframes blind-animate {
+  from {object-position: 0px 0px}
+  to {object-position: -2720px 0px}
+}
+.blinds .joker img {
+  width: 136px;
+  height: 136px;
+  object-fit: cover;
+  animation: blind-animate 2.1s linear infinite;
+  animation-timing-function: steps(20, start);
 }
 
 #download {
