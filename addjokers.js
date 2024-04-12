@@ -1,12 +1,12 @@
 let jokers = [
-  {
-    name: "Joker",
-    text: [
-      "{C:mult}+4{} Mult"
-    ],
-    image_url: "img/j_joker.png",
-    rarity: "Common"
-  }
+  // {
+  //   name: "Joker",
+  //   text: [
+  //     "{C:mult}+4{} Mult"
+  //   ],
+  //   image_url: "img/j_joker.png",
+  //   rarity: "Common"
+  // }
 ]
 
 // works the same. 
@@ -109,6 +109,25 @@ let blinds = [
   // },
 ]
 
+let shop_items = [
+  {
+    name: "Joker",
+    text: [
+      "{C:mult}+4{} Mult"
+    ],
+    image_url: "img/j_joker.png",
+    rarity: "Voucher"
+  },
+  {
+    name: "Joker",
+    text: [
+      "{C:mult}+4{} Mult"
+    ],
+    image_url: "img/j_joker.png",
+    rarity: "Pack"
+  },
+]
+
 let cols = {
   
   MULT: "#FE5F55",
@@ -143,51 +162,13 @@ let cols = {
   DIAMONDS: "#f06b3f",
   SPADES: "#403995",
   CLUBS: "#235955",
-  DYN_UI: {
-    MAIN: "#374244",
-    DARK: "#374244",
-    BOSS_MAIN: "#374244",
-    BOSS_DARK: "#374244",
-    BOSS_PALE: "#374244"
-  },
-  SO_1: {
-    Hearts: "#f03464",
-    Diamonds: "#f06b3f",
-    Spades: "#403995",
-    Clubs: "#235955",
-  },
-  SO_2: {
-    Hearts: "#f83b2f",
-    Diamonds: "#e29000",
-    Spades: "#4f31b9",
-    Clubs: "#008ee6",
-  },
-  SUITS: {
-      Hearts: "#FE5F55",
-      Diamonds: "#FE5F55",
-      Spades: "#374649",
-      Clubs: "#424e54",
-  },
-  
-  SET: {
-    Default: "#cdd9dc",
-    Enhanced: "#cdd9dc",
-    Joker: "#424e54",
-    Tarot: "#424e54",
-    Planet: "#424e54",
-    Spectral: "#424e54",
-    Voucher: "#424e54",
-  }, 
-  SECONDARY_SET: {
-    Default: "#9bb6bdFF",
-    Enhanced: "#8389DDFF",
-    Joker: "#708b91",
-    Tarot: "#a782d1",
-    Planet: "#13afce",
-    Spectral: "#4584fa",
-    Voucher: "#fd682b",
-    Edition: "#4ca893",
-  },
+  ENHANCED: "#8389DD",
+  JOKER: "#708b91",
+  TAROT: "#a782d1",
+  PLANET: "#13afce",
+  SPECTRAL: "#4584fa",
+  VOUCHER: "#fd682b",
+  EDITION: "#4ca893",
 }
 
 let rarities = {
@@ -200,6 +181,7 @@ let rarities = {
   "Planet": "#13afce",
   "Spectral": "#4584fa",
   "Voucher": "#fd682b",
+  "Pack": "#9bb6bd",
   "Enhancement": "#8389DD",
   "Edition": "#4ca893",
   "Seal": "#4584fa",
@@ -308,4 +290,11 @@ if (blinds.length === 0) {
 } else {
   let blinds_div = document.querySelector(".blinds");
   add_cards_to_div(blinds, blinds_div);
+}
+
+if (shop_items.length === 0) {
+  document.querySelector(".shopitemsfull").style.display = "none"
+} else {
+  let shopitems_div = document.querySelector(".shopitems");
+  add_cards_to_div(shop_items, shopitems_div);
 }
